@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BizCard Studio — Sign Up</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="auth-page">
+
+  <div class="auth-overlay">
+    <div class="auth-card">
+
+      <!-- Logo -->
+      <div class="auth-logo">
+        <div class="logo-box">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="5" width="20" height="14" rx="2" fill="none" stroke="#F7F4EF" stroke-width="1.5"/>
+            <line x1="2" y1="9" x2="22" y2="9" stroke="#F7F4EF" stroke-width="1.5"/>
+            <circle cx="6" cy="14" r="1.5" fill="#F7F4EF"/>
+          </svg>
+        </div>
+        <div>
+          <div class="auth-brand-name">BizCard Studio</div>
+          <div class="auth-brand-sub">Professional Business Card Generator</div>
+        </div>
+      </div>
+
+      <!-- Tab Switcher -->
+      <div class="auth-tabs">
+        <button class="auth-tab" id="tabLogin" onclick="window.location.href='index.html'">Login</button>
+        <button class="auth-tab active" id="tabSignup">Sign Up</button>
+      </div>
+
+      <!-- Message Box -->
+      <div class="auth-message" id="authMessage"></div>
+
+      <!-- SIGNUP FORM -->
+      <form id="signupForm" class="auth-form" onsubmit="handleSignup(event)">
+
+        <div class="auth-field-row">
+          <div class="auth-field">
+            <label for="signupFirstName">First Name</label>
+            <input type="text" id="signupFirstName" placeholder="Ahmed" required maxlength="30" />
+          </div>
+          <div class="auth-field">
+            <label for="signupLastName">Last Name</label>
+            <input type="text" id="signupLastName" placeholder="Raza" maxlength="30" />
+          </div>
+        </div>
+
+        <div class="auth-field">
+          <label for="signupEmail">Email Address</label>
+          <input type="email" id="signupEmail" placeholder="you@example.com" required autocomplete="email" />
+        </div>
+
+        <div class="auth-field">
+          <label for="signupPassword">Password</label>
+          <div class="password-wrap">
+            <input type="password" id="signupPassword" placeholder="Minimum 6 characters" required minlength="6" autocomplete="new-password" />
+            <button type="button" class="toggle-pw" onclick="togglePassword('signupPassword', this)">👁</button>
+          </div>
+          <div class="pw-strength-wrap">
+            <div class="pw-strength-bar" id="pwStrengthBar"></div>
+          </div>
+          <div class="pw-strength-label" id="pwStrengthLabel"></div>
+        </div>
+
+        <div class="auth-field">
+          <label for="signupConfirm">Confirm Password</label>
+          <div class="password-wrap">
+            <input type="password" id="signupConfirm" placeholder="Repeat password" required autocomplete="new-password" />
+            <button type="button" class="toggle-pw" onclick="togglePassword('signupConfirm', this)">👁</button>
+          </div>
+        </div>
+
+        <div class="auth-field">
+          <label class="checkbox-label">
+            <input type="checkbox" id="agreeTerms" required />
+            <span>I agree to the <button type="button" class="terms-link">Terms &amp; Conditions</button></span>
+          </label>
+        </div>
+
+        <button type="submit" class="auth-submit-btn" id="signupBtn">
+          Create Free Account
+        </button>
+
+        <p class="auth-switch-text">
+          Already have an account?
+          <button type="button" onclick="window.location.href='index.html'">Login</button>
+        </p>
+
+      </form>
+
+      <!-- Footer Strip -->
+      <div class="auth-footer-strip">
+        🔒 Your data is stored locally &nbsp;·&nbsp; No credit card needed &nbsp;·&nbsp; Free forever
+      </div>
+
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // Password strength listener
+    document.addEventListener('DOMContentLoaded', function () {
+      var signupPw = document.getElementById('signupPassword');
+      if (signupPw) {
+        signupPw.addEventListener('input', function () {
+          checkPasswordStrength(this.value);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,469 @@
+/* ============================================================
+   style.css  —  BizCard Studio
+   ============================================================ */
+
+/* ============================================================
+   1.  CSS VARIABLES
+   ============================================================ */
+:root {
+  --bg:        #F7F4EF;
+  --surface:   #FDFBF8;
+  --surface2:  #F0EDE6;
+  --surface3:  #E8E2D6;
+  --ink:       #1A1510;
+  --ink2:      #3D3628;
+  --ink3:      #7A6E5C;
+  --ink4:      #B0A490;
+  --border:    #DDD5C4;
+  --border2:   #C8BDA8;
+  --accent:        #1A1510;
+  --accent-hover:  #3D3628;
+  --red:         #C0392B;
+  --red-pale:    #FAE8E6;
+  --green:       #27AE60;
+  --green-pale:  #E6F5EC;
+  --yellow:      #F39C12;
+  --yellow-pale: #FEF5E5;
+  --radius:    10px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --shadow:    0 2px 16px rgba(26, 21, 16, 0.08);
+  --shadow-md: 0 4px 24px rgba(26, 21, 16, 0.12);
+  --shadow-lg: 0 8px 48px rgba(26, 21, 16, 0.18);
+  --nav-h: 58px;
+}
+
+/* ============================================================
+   2.  RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+button { font-family: 'DM Sans', sans-serif; cursor: pointer; }
+input, select, textarea { font-family: 'DM Sans', sans-serif; }
+
+/* ============================================================
+   3.  BACKGROUND DOT PATTERN
+   ============================================================ */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgba(26, 21, 16, 0.065) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* ============================================================
+   4.  AUTH OVERLAY & CARD
+   ============================================================ */
+.auth-page { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+
+.auth-overlay {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  width: 100%;
+  background-image:
+    radial-gradient(ellipse 70% 50% at 20% 10%, rgba(192, 57, 43, 0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 60% at 80% 90%, rgba(26, 21, 16, 0.04) 0%, transparent 60%);
+}
+
+.auth-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  width: 100%;
+  max-width: 440px;
+  padding: 2.25rem 2rem 1.75rem;
+  position: relative;
+  z-index: 1;
+  animation: slideUp 0.4s ease forwards;
+}
+
+/* ============================================================
+   5.  AUTH LOGO
+   ============================================================ */
+.auth-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 1.75rem; }
+
+.logo-box {
+  width: 44px; height: 44px;
+  background: var(--accent);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.logo-box svg { width: 24px; height: 24px; }
+
+.logo-sm { width: 34px; height: 34px; border-radius: 8px; }
+.logo-sm svg { width: 18px; height: 18px; }
+
+.auth-brand-name { font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--ink); line-height: 1.1; }
+.auth-brand-sub  { font-size: 11.5px; color: var(--ink3); margin-top: 2px; }
+
+/* ============================================================
+   6.  AUTH TABS
+   ============================================================ */
+.auth-tabs {
+  display: flex;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 4px;
+  margin-bottom: 1.5rem;
+}
+.auth-tab {
+  flex: 1; padding: 9px 12px; border: none;
+  border-radius: 7px; background: transparent;
+  color: var(--ink3); font-size: 13.5px; font-weight: 500;
+  cursor: pointer; transition: all 0.2s;
+}
+.auth-tab.active { background: var(--surface); color: var(--ink); box-shadow: var(--shadow); }
+.auth-tab:hover:not(.active) { color: var(--ink2); }
+
+/* ============================================================
+   7.  AUTH FORMS
+   ============================================================ */
+.auth-form { display: flex; flex-direction: column; }
+.auth-field { margin-bottom: 1rem; }
+.auth-field label { display: block; font-size: 12.5px; font-weight: 500; color: var(--ink3); margin-bottom: 6px; }
+
+.auth-field input[type="text"],
+.auth-field input[type="email"],
+.auth-field input[type="password"] {
+  width: 100%; padding: 11px 14px;
+  background: var(--bg); border: 1.5px solid var(--border);
+  border-radius: var(--radius); font-size: 14px; color: var(--ink);
+  outline: none; transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+.auth-field input:focus {
+  border-color: var(--accent); background: var(--surface);
+  box-shadow: 0 0 0 3px rgba(26, 21, 16, 0.06);
+}
+.auth-field input.input-error { border-color: var(--red); background: var(--red-pale); }
+
+.auth-field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+.auth-remember-row {
+  display: flex; align-items: center;
+  justify-content: space-between; margin-bottom: 1.25rem;
+}
+
+.auth-message { display: none; padding: 10px 14px; border-radius: var(--radius); font-size: 13px; margin-bottom: 1rem; line-height: 1.5; }
+.auth-message.error   { display: block; background: var(--red-pale);    color: var(--red);   border: 1px solid rgba(192,57,43,0.25); }
+.auth-message.success { display: block; background: var(--green-pale);  color: var(--green); border: 1px solid rgba(39,174,96,0.25); }
+.auth-message.info    { display: block; background: var(--yellow-pale); color: #7D5A0A;      border: 1px solid rgba(243,156,18,0.25); }
+
+/* ============================================================
+   8.  PASSWORD TOGGLE & STRENGTH BAR
+   ============================================================ */
+.password-wrap { position: relative; }
+.password-wrap input { padding-right: 44px; }
+
+.toggle-pw {
+  position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+  background: none; border: none; cursor: pointer;
+  font-size: 16px; color: var(--ink4); padding: 4px; line-height: 1;
+  transition: color 0.15s;
+}
+.toggle-pw:hover { color: var(--ink2); }
+
+.pw-strength-wrap { height: 4px; background: var(--border); border-radius: 99px; margin-top: 6px; overflow: hidden; }
+.pw-strength-bar  { height: 100%; border-radius: 99px; width: 0%; transition: width 0.3s ease, background 0.3s; }
+.pw-strength-bar.weak   { width: 25%; background: var(--red); }
+.pw-strength-bar.fair   { width: 50%; background: var(--yellow); }
+.pw-strength-bar.good   { width: 75%; background: #3498DB; }
+.pw-strength-bar.strong { width: 100%; background: var(--green); }
+.pw-strength-label { font-size: 11px; color: var(--ink4); margin-top: 3px; }
+
+/* ============================================================
+   9.  AUTH BUTTONS & LINKS
+   ============================================================ */
+.auth-submit-btn {
+  width: 100%; padding: 13px 20px;
+  background: var(--accent); color: #F7F4EF;
+  border: none; border-radius: var(--radius);
+  font-size: 14px; font-weight: 600; cursor: pointer;
+  transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+  margin-top: 0.25rem; margin-bottom: 1rem;
+}
+.auth-submit-btn:hover  { background: var(--accent-hover); box-shadow: 0 4px 14px rgba(26,21,16,0.28); transform: translateY(-1px); }
+.auth-submit-btn:active { transform: scale(0.98); }
+.auth-submit-btn.loading { opacity: 0.7; pointer-events: none; }
+
+.auth-switch-text { font-size: 12.5px; color: var(--ink3); text-align: center; margin-bottom: 0.5rem; }
+.auth-switch-text button { background: none; border: none; color: var(--ink); font-weight: 600; font-size: 12.5px; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+
+.forgot-link { background: none; border: none; color: var(--ink3); font-size: 12px; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+.forgot-link:hover { color: var(--ink); }
+
+.terms-link { background: none; border: none; color: var(--ink); font-size: inherit; font-family: inherit; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; padding: 0; }
+
+.checkbox-label { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--ink3); cursor: pointer; user-select: none; }
+.checkbox-label input[type="checkbox"] { width: 15px; height: 15px; cursor: pointer; accent-color: var(--accent); }
+
+/* ============================================================
+   10. AUTH FOOTER STRIP
+   ============================================================ */
+.auth-footer-strip { margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 11.5px; color: var(--ink4); text-align: center; line-height: 1.6; }
+
+/* ============================================================
+   11. TOP NAVIGATION BAR
+   ============================================================ */
+.top-nav {
+  height: var(--nav-h);
+  background: var(--accent);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 1.5rem;
+  position: sticky; top: 0; z-index: 100; gap: 1rem;
+}
+.nav-logo     { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.nav-brand    { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: #F7F4EF; }
+.nav-brand span { color: rgba(247,244,239,0.55); }
+.nav-center   { flex: 1; text-align: center; }
+.nav-page-title { font-size: 12.5px; font-weight: 500; color: rgba(247,244,239,0.55); text-transform: uppercase; letter-spacing: 0.1em; }
+.nav-right    { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.nav-user-info { display: flex; align-items: center; gap: 10px; }
+.nav-greeting { font-size: 13px; color: rgba(247,244,239,0.70); }
+.nav-avatar   { width: 32px; height: 32px; border-radius: 50%; background: rgba(247,244,239,0.15); border: 1.5px solid rgba(247,244,239,0.25); color: #F7F4EF; font-size: 13px; font-weight: 600; display: flex; align-items: center; justify-content: center; text-transform: uppercase; flex-shrink: 0; }
+.nav-logout-btn { padding: 7px 14px; background: rgba(247,244,239,0.10); border: 1px solid rgba(247,244,239,0.18); border-radius: 8px; color: rgba(247,244,239,0.80); font-size: 12.5px; font-weight: 500; cursor: pointer; transition: all 0.15s; }
+.nav-logout-btn:hover { background: rgba(247,244,239,0.18); color: #F7F4EF; }
+
+/* ============================================================
+   12. MAIN APP LAYOUT
+   ============================================================ */
+.app { position: relative; z-index: 1; display: grid; grid-template-columns: 400px 1fr; height: calc(100vh - var(--nav-h)); }
+
+/* ============================================================
+   13. LEFT PANEL
+   ============================================================ */
+.panel { background: var(--surface); border-right: 1px solid var(--border); overflow-y: auto; height: 100%; display: flex; flex-direction: column; }
+.panel::-webkit-scrollbar       { width: 3px; }
+.panel::-webkit-scrollbar-track { background: transparent; }
+.panel::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 99px; }
+
+/* ============================================================
+   14. SECTION BLOCKS
+   ============================================================ */
+.section { padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border); }
+.section:last-child { border-bottom: none; }
+.sec-title { font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink3); margin-bottom: 1rem; display: flex; align-items: center; gap: 7px; }
+.sec-title::before { content: ''; display: block; width: 14px; height: 1.5px; background: var(--ink); border-radius: 99px; }
+
+/* ============================================================
+   15. FORM ELEMENTS
+   ============================================================ */
+.field { margin-bottom: 0.9rem; }
+.field label { display: block; font-size: 12px; font-weight: 500; color: var(--ink3); margin-bottom: 5px; }
+.field input, .field select { width: 100%; padding: 9px 12px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); font-size: 13.5px; color: var(--ink); outline: none; transition: border-color 0.2s, background 0.2s; }
+.field input:focus, .field select:focus { border-color: var(--ink); background: var(--surface); }
+.field select { appearance: none; -webkit-appearance: none; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%237A6E5C'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
+.field input[type="color"] { height: 38px; padding: 3px 6px; cursor: pointer; border-radius: var(--radius); }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+/* ============================================================
+   16. TEMPLATE PICKER
+   ============================================================ */
+.tpl-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.tpl-thumb { border: 2px solid var(--border); border-radius: var(--radius); overflow: hidden; cursor: pointer; transition: border-color 0.15s, transform 0.12s; aspect-ratio: 1.75; position: relative; }
+.tpl-thumb:hover { transform: translateY(-2px); border-color: var(--border2); }
+.tpl-thumb.selected { border-color: var(--ink); border-width: 2.5px; }
+.tpl-preview { width: 100%; height: 100%; position: relative; overflow: hidden; }
+.tpl-label { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(26,21,16,0.72); color: #fff; font-size: 9px; text-align: center; padding: 3px 0; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 500; }
+.tpl-thumb.selected .tpl-label { background: var(--ink); }
+
+/* ============================================================
+   17. BUTTONS
+   ============================================================ */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 7px; padding: 10px 20px; border-radius: var(--radius); border: 1.5px solid transparent; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s; white-space: nowrap; line-height: 1; }
+.btn-dark { background: var(--ink); color: #F7F4EF; border-color: var(--ink); }
+.btn-dark:hover { background: var(--ink2); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(26,21,16,0.25); }
+.btn-dark:active { transform: scale(0.97); }
+.btn-ghost { background: transparent; color: var(--ink2); border-color: var(--border); }
+.btn-ghost:hover { border-color: var(--ink); background: var(--surface2); }
+.btn-outline-red { background: transparent; color: var(--red); border: 1.5px solid rgba(192,57,43,0.30); }
+.btn-outline-red:hover { background: var(--red-pale); border-color: var(--red); }
+.btn-full { width: 100%; }
+.btn-sm   { padding: 7px 14px; font-size: 12px; }
+.action-row { display: flex; gap: 8px; }
+
+/* ============================================================
+   18. RIGHT PANEL
+   ============================================================ */
+.preview-panel { display: flex; flex-direction: column; background: var(--bg); height: 100%; overflow-y: auto; }
+.preview-bar { padding: 1rem 2rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 1rem; background: var(--surface); flex-wrap: wrap; flex-shrink: 0; }
+.preview-bar-title { font-family: 'DM Serif Display', serif; font-size: 1rem; color: var(--ink); }
+.preview-bar-sub { font-size: 11.5px; color: var(--ink3); margin-top: 1px; }
+
+/* ============================================================
+   19. VIEW TABS
+   ============================================================ */
+.view-tabs { display: flex; gap: 4px; }
+.view-tab { padding: 7px 14px; border-radius: 8px; border: 1px solid transparent; background: transparent; color: var(--ink3); font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.15s; }
+.view-tab.active { background: var(--surface2); border-color: var(--border); color: var(--ink); }
+.view-tab:hover:not(.active) { color: var(--ink2); background: var(--surface2); }
+
+/* ============================================================
+   20. CANVAS AREA
+   ============================================================ */
+.canvas-area { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 3rem 2rem; gap: 2rem; overflow-y: auto; }
+.card-wrapper { position: relative; filter: drop-shadow(0 12px 36px rgba(26,21,16,0.20)); transition: transform 0.3s; }
+.card-wrapper:hover { transform: translateY(-4px) rotate(0.4deg); }
+.card-side-label { font-size: 10.5px; color: var(--ink3); text-align: center; margin-bottom: 6px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; }
+.card-flip-area { display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap; justify-content: center; }
+
+/* ============================================================
+   21. CARD SHELL
+   ============================================================ */
+#bizCard { width: 380px; height: 217px; position: relative; overflow: hidden; border-radius: 8px; transition: all 0.3s; }
+
+/* ============================================================
+   22. TEMPLATE 1 — Minimal Mono
+   ============================================================ */
+.tpl-1 { background: #FDFBF8; font-family: 'DM Sans', sans-serif; }
+.tpl-1 .t-accent-bar { position: absolute; left: 0; top: 0; bottom: 0; width: 5px; }
+.tpl-1 .t-name    { position: absolute; left: 28px; top: 30px; font-size: 20px; font-weight: 600; color: #1A1510; line-height: 1.1; }
+.tpl-1 .t-role    { position: absolute; left: 28px; top: 68px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: #7A6E5C; }
+.tpl-1 .t-company { position: absolute; left: 28px; top: 84px; font-size: 11px; font-weight: 500; color: #3D3628; }
+.tpl-1 .t-divider { position: absolute; left: 28px; top: 105px; width: 40px; height: 1.5px; }
+.tpl-1 .t-phone   { position: absolute; left: 28px; top: 118px; font-size: 9.5px; color: #7A6E5C; }
+.tpl-1 .t-email   { position: absolute; left: 28px; top: 133px; font-size: 9.5px; color: #7A6E5C; }
+.tpl-1 .t-website { position: absolute; left: 28px; top: 148px; font-size: 9.5px; color: #7A6E5C; }
+.tpl-1 .t-qr      { position: absolute; right: 24px; bottom: 20px; }
+
+/* ============================================================
+   23. TEMPLATE 2 — Dark Luxury
+   ============================================================ */
+.tpl-2 { background: #1A1510; font-family: 'DM Serif Display', serif; }
+.tpl-2 .t-geo { position: absolute; right: -20px; top: -20px; width: 130px; height: 130px; border-radius: 50%; opacity: 0.07; }
+.tpl-2 .t-name { position: absolute; left: 28px; top: 32px; font-size: 22px; color: #F7F4EF; line-height: 1.1; font-family: 'DM Serif Display', serif; }
+.tpl-2 .t-name em { font-style: italic; }
+.tpl-2 .t-role    { position: absolute; left: 28px; top: 82px; font-size: 9px; text-transform: uppercase; letter-spacing: 0.18em; color: #B0A490; font-family: 'DM Sans', sans-serif; }
+.tpl-2 .t-company { position: absolute; left: 28px; top: 98px; font-size: 11px; color: #C8BDA8; font-family: 'DM Sans', sans-serif; font-weight: 300; }
+.tpl-2 .t-line    { position: absolute; right: 28px; top: 0; bottom: 0; width: 1px; background: rgba(255,255,255,0.10); }
+.tpl-2 .t-contact-block { position: absolute; right: 44px; top: 50%; transform: translateY(-50%); text-align: right; }
+.tpl-2 .t-phone, .tpl-2 .t-email, .tpl-2 .t-website { display: block; font-size: 9.5px; color: #B0A490; font-family: 'DM Sans', sans-serif; margin-bottom: 5px; }
+.tpl-2 .t-dot { position: absolute; right: 24px; bottom: 24px; width: 8px; height: 8px; border-radius: 50%; }
+.tpl-2 .t-qr  { position: absolute; left: 28px; bottom: 18px; }
+
+/* ============================================================
+   24. TEMPLATE 3 — Bold Brutalist
+   ============================================================ */
+.tpl-3 { background: #F7F4EF; font-family: 'Bebas Neue', sans-serif; }
+.tpl-3 .t-topbar  { position: absolute; top: 0; left: 0; right: 0; height: 6px; }
+.tpl-3 .t-name    { position: absolute; left: 20px; top: 20px; font-size: 34px; line-height: 0.95; color: #1A1510; letter-spacing: 0.02em; }
+.tpl-3 .t-role    { position: absolute; left: 22px; top: 90px; font-size: 13px; color: #7A6E5C; font-family: 'DM Sans', sans-serif; font-weight: 300; text-transform: uppercase; letter-spacing: 0.10em; }
+.tpl-3 .t-company { position: absolute; left: 22px; top: 108px; font-size: 11px; color: #1A1510; font-family: 'DM Sans', sans-serif; font-weight: 600; }
+.tpl-3 .t-vline   { position: absolute; right: 130px; top: 20px; bottom: 20px; width: 2px; }
+.tpl-3 .t-contact-block { position: absolute; right: 18px; top: 50%; transform: translateY(-50%); text-align: right; width: 110px; }
+.tpl-3 .t-phone, .tpl-3 .t-email, .tpl-3 .t-website { display: block; font-size: 9px; color: #3D3628; font-family: 'DM Sans', sans-serif; margin-bottom: 5px; line-height: 1.4; }
+.tpl-3 .t-qr { position: absolute; left: 22px; bottom: 16px; }
+
+/* ============================================================
+   25. TEMPLATE 4 — Classic Editorial
+   ============================================================ */
+.tpl-4 { background: #FDFBF8; font-family: 'Libre Baskerville', serif; }
+.tpl-4 .t-corner-tl { position: absolute; top: 0; left: 0; width: 50px; height: 50px; border-right: 1.5px solid; border-bottom: 1.5px solid; }
+.tpl-4 .t-corner-br { position: absolute; bottom: 0; right: 0; width: 50px; height: 50px; border-left: 1.5px solid; border-top: 1.5px solid; }
+.tpl-4 .t-name    { position: absolute; left: 50%; top: 36px; transform: translateX(-50%); text-align: center; font-size: 18px; font-weight: 700; color: #1A1510; white-space: nowrap; }
+.tpl-4 .t-ornament { position: absolute; left: 50%; top: 68px; transform: translateX(-50%); font-size: 16px; }
+.tpl-4 .t-role    { position: absolute; left: 50%; top: 82px; transform: translateX(-50%); text-align: center; font-size: 9px; font-style: italic; color: #7A6E5C; white-space: nowrap; }
+.tpl-4 .t-company { position: absolute; left: 50%; top: 98px; transform: translateX(-50%); text-align: center; font-size: 10px; font-family: 'DM Sans', sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; white-space: nowrap; }
+.tpl-4 .t-hline   { position: absolute; left: 50%; top: 116px; transform: translateX(-50%); height: 1px; }
+.tpl-4 .t-contact-row { position: absolute; left: 50%; bottom: 30px; transform: translateX(-50%); display: flex; gap: 14px; align-items: center; white-space: nowrap; }
+.tpl-4 .t-phone, .tpl-4 .t-email, .tpl-4 .t-website { font-size: 9px; color: #7A6E5C; font-family: 'DM Sans', sans-serif; }
+.tpl-4 .t-sep { font-size: 9px; color: #C8BDA8; }
+.tpl-4 .t-qr  { position: absolute; right: 60px; bottom: 20px; }
+
+/* ============================================================
+   26. TEMPLATE 5 — Modern Split
+   ============================================================ */
+.tpl-5 { background: #FDFBF8; font-family: 'Josefin Sans', sans-serif; }
+.tpl-5 .t-left-panel { position: absolute; left: 0; top: 0; bottom: 0; width: 165px; display: flex; flex-direction: column; justify-content: center; padding: 20px 18px; }
+.tpl-5 .t-initial { font-size: 52px; font-weight: 300; line-height: 1; margin-bottom: 4px; letter-spacing: -2px; }
+.tpl-5 .t-name    { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; line-height: 1.3; }
+.tpl-5 .t-role    { font-size: 9px; font-weight: 300; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px; }
+.tpl-5 .t-right-panel { position: absolute; left: 165px; right: 0; top: 0; bottom: 0; padding: 20px 18px; display: flex; flex-direction: column; justify-content: center; }
+.tpl-5 .t-company { font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 10px; }
+.tpl-5 .t-divider-h { height: 1.5px; width: 30px; margin-bottom: 10px; }
+.tpl-5 .t-phone, .tpl-5 .t-email, .tpl-5 .t-website { display: block; font-size: 9px; color: #7A6E5C; font-weight: 300; letter-spacing: 0.04em; margin-bottom: 4px; }
+.tpl-5 .t-qr { position: absolute; right: 14px; bottom: 14px; }
+
+/* ============================================================
+   27. TEMPLATE 6 — Urdu Inspired
+   ============================================================ */
+.tpl-6 { background: #F7F4EF; font-family: 'DM Serif Display', serif; }
+.tpl-6 .t-border-frame { position: absolute; inset: 8px; border: 1px solid; border-radius: 4px; pointer-events: none; }
+.tpl-6 .t-top-ornament { position: absolute; top: 18px; left: 50%; transform: translateX(-50%); font-size: 13px; letter-spacing: 0.3em; }
+.tpl-6 .t-name-urdu { position: absolute; left: 50%; top: 36px; transform: translateX(-50%); text-align: center; font-family: 'DM Serif Display', serif; font-style: italic; font-size: 22px; line-height: 1.1; white-space: nowrap; }
+.tpl-6 .t-role    { position: absolute; left: 50%; top: 76px; transform: translateX(-50%); text-align: center; font-size: 9px; text-transform: uppercase; letter-spacing: 0.15em; color: #7A6E5C; font-family: 'DM Sans', sans-serif; font-weight: 500; white-space: nowrap; }
+.tpl-6 .t-company { position: absolute; left: 50%; top: 90px; transform: translateX(-50%); text-align: center; font-size: 10.5px; font-family: 'DM Sans', sans-serif; font-weight: 600; color: #3D3628; white-space: nowrap; }
+.tpl-6 .t-wave    { position: absolute; left: 50%; top: 108px; transform: translateX(-50%); font-size: 14px; letter-spacing: 0.25em; }
+.tpl-6 .t-contact-row { position: absolute; left: 50%; bottom: 28px; transform: translateX(-50%); display: flex; gap: 10px; align-items: center; white-space: nowrap; }
+.tpl-6 .t-phone, .tpl-6 .t-email, .tpl-6 .t-website { font-size: 9px; color: #7A6E5C; font-family: 'DM Sans', sans-serif; }
+.tpl-6 .t-sep { font-size: 8px; color: #C8BDA8; }
+.tpl-6 .t-qr  { position: absolute; right: 20px; bottom: 18px; }
+
+/* ============================================================
+   28. TOAST
+   ============================================================ */
+.toast { position: fixed; bottom: 2rem; right: 2rem; background: var(--ink); color: #F7F4EF; border-radius: var(--radius); padding: 10px 18px; font-size: 13px; font-weight: 500; opacity: 0; transform: translateY(8px); transition: opacity 0.25s, transform 0.25s; z-index: 2000; pointer-events: none; box-shadow: var(--shadow-md); }
+.toast.show { opacity: 1; transform: translateY(0); }
+#qrRender { position: fixed; left: -9999px; top: 0; background: #fff; padding: 4px; }
+
+/* ============================================================
+   29. UTILITY
+   ============================================================ */
+.hidden { display: none !important; }
+
+/* ============================================================
+   30. ANIMATIONS
+   ============================================================ */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-in { animation: fadeIn 0.3s ease forwards; }
+
+/* ============================================================
+   31. PRINT STYLES
+   ============================================================ */
+@media print {
+  body         { background: #fff; }
+  body::before { display: none; }
+  .top-nav, .panel, .preview-bar { display: none !important; }
+  .app         { grid-template-columns: 1fr; height: auto; }
+  .preview-panel { height: auto; }
+  .canvas-area { padding: 1rem; justify-content: flex-start; }
+  #bizCard     { box-shadow: none !important; filter: none !important; }
+}
+
+/* ============================================================
+   32. RESPONSIVE
+   ============================================================ */
+@media (max-width: 860px) {
+  .app { grid-template-columns: 1fr; height: auto; }
+  .panel { height: auto; max-height: none; overflow-y: visible; }
+  .preview-panel { min-height: 60vh; height: auto; }
+  #bizCard { width: 320px; height: 183px; }
+  .auth-field-row { grid-template-columns: 1fr; }
+  .nav-greeting, .nav-page-title { display: none; }
+  .top-nav { padding: 0 1rem; }
+}
