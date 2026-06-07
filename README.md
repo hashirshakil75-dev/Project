@@ -1,185 +1,158 @@
-# BizCard Studio
+# 🪪 BizCard Studio
 
-![License](https://img.shields.io/badge/license-MIT-green)
-![HTML](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
-![CSS](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
-![No Backend](https://img.shields.io/badge/backend-none-lightgrey)
-![Storage](https://img.shields.io/badge/storage-localStorage-blue)
-
-**BizCard Studio** is a lightweight, self-hosted business card generator that runs entirely in the browser. Design, preview, and export professional business cards in seconds — no server, no signup required to run, and no data ever leaves your device.
+A professional, multi-page **Business Card Generator** built with pure HTML, CSS, and JavaScript. No frameworks, no build tools — just open and run.
 
 ---
 
-## Introduction
-
-BizCard Studio lets you create polished business cards with a live preview editor. Choose from 6 unique templates, customize colors and fonts, auto-generate a QR code, and download a high-resolution PNG — all from a simple web interface. The app includes a full local authentication system (sign up / login / logout) so multiple users can save their own card designs independently.
-
-Designed as a mid-term project, BizCard Studio is built with **pure HTML, CSS, and JavaScript** — no frameworks, no build tools, no dependencies beyond two CDN libraries.
-
----
-
-## Screenshots
-
-### Login Page
-> Clean authentication UI with password strength meter and remember-me support.
-
-### Card Designer
-> Live 2-sided preview with template picker, style controls, and export options.
-
----
-
-## Features
-
-### 🎨 Card Designer
-- **6 unique templates** — Minimal Mono, Dark Luxury, Bold Brutalist, Classic Editorial, Modern Split, Urdu Style
-- Live front/back/both-sides preview
-- Accent color and background color pickers
-- Font scale control (Compact / Normal / Large)
-- Real-time update on every keystroke
-
-### 📇 QR Code
-- Auto-generated QR linking to Phone, Email, Website, or full vCard
-- Rendered on card back with your name
-
-### 💾 Export Options
-- **Download PNG** — 3.5× high-resolution via `html2canvas`
-- **Copy to Clipboard** — paste anywhere
-- **Print** — print-optimized layout, UI hidden automatically
-
-### 🔐 Authentication
-- Sign up / Login / Logout
-- Password strength meter
-- Remember Me (localStorage) vs session-only (sessionStorage)
-- Per-user card state saved automatically
-- Protected route — card designer redirects to login if no session
-
-### 🌍 No Backend Required
-- All data stored in browser `localStorage`
-- Works offline after first load
-- Zero server costs, zero setup
-
----
-
-## Installation
-
-No build step or server required.
-
-**1. Download the project files**
+## 📁 File Structure
 
 ```
-index.html
-signup.html
-app.html
-style.css
-script.js
-```
-
-**2. Open in browser**
-
-```bash
-# Just open index.html in any modern browser
-open index.html
-```
-Then visit `http://localhost:8080`
-
----
-
-## File Structure
-
-```
-BizCard-Studio/
-├── index.html      # Login page (entry point)
-├── signup.html     # Registration page
-├── app.html        # Card designer (protected)
-├── style.css       # All styles — auth, nav, designer, templates, responsive
-└── script.js       # All logic — auth, rendering, QR, export, persistence
+bizcard/
+├── index.html      ← Login page (entry point)
+├── signup.html     ← Sign Up page
+├── app.html        ← Main card designer app
+├── style.css       ← Shared stylesheet (all pages)
+├── script.js       ← Shared JavaScript (all pages)
+└── README.md       ← You are here
 ```
 
 ---
 
-## How It Works
+## 🚀 Getting Started
 
-### Auth Flow
+1. Download or clone all files into a single folder.
+2. Open **`index.html`** in your browser.
+3. Sign up for a free account (data is stored locally).
+4. Start designing your business card!
+
+> ⚠️ All files must be in the **same folder** for the app to work correctly.
+
+---
+
+## 🔐 Auth System
+
+| Page | Purpose |
+|------|---------|
+| `index.html` | Login form — entry point of the app |
+| `signup.html` | New account registration |
+| `app.html` | Protected designer — redirects to login if no session |
+
+**How it works:**
+- Accounts are saved in `localStorage` (browser storage).
+- On login, a session is created in `localStorage` (remember me) or `sessionStorage` (tab only).
+- `app.html` checks for a valid session on load — if none found, it redirects back to `index.html`.
+- Logout clears the session and redirects to `index.html`.
+
+> 🔒 **Note:** This is a demo/local app. Passwords are stored in plain text in localStorage. Do **not** use real passwords — not intended for production use.
+
+---
+
+## 🎨 Features
+
+### 6 Business Card Templates
+| # | Template | Style |
+|---|----------|-------|
+| 1 | Minimal Mono | Clean left accent bar, serif text |
+| 2 | Dark Luxury | Dark background, italic serif name |
+| 3 | Bold Brutalist | Thick stripe, giant Bebas Neue font |
+| 4 | Classic Editorial | Centered layout, corner bracket ornaments |
+| 5 | Modern Split | Colored left panel with large initials |
+| 6 | Urdu Inspired | Ornamental border, italic centered name |
+
+### Card Customization
+- ✏️ Full Name, Designation, Company
+- 📞 Phone, Email, Website
+- 🎨 Accent color picker
+- 🖼️ Card background color picker
+- 🔠 Font scale (Compact / Normal / Large)
+- 📱 QR code (links to Phone, Email, Website, or full vCard)
+
+### Preview Modes
+- **Front** — front face of the card
+- **Back (QR)** — back side with large QR code
+- **Both Sides** — front and back side by side
+
+### Export Options
+- ⬇️ **Download PNG** — high-resolution (3.5× scale, ~300 DPI, print quality)
+- 📋 **Copy to Clipboard** — paste directly into other apps
+- 🖨️ **Print** — browser print dialog, controls hidden automatically
+
+---
+
+## 💾 Data Persistence
+
+- Card design data is saved automatically to `localStorage` per user account.
+- Multiple accounts on the same browser each get their own saved card state.
+- Resetting the card clears the saved data for the current user.
+
+---
+
+## 🛠️ Technologies Used
+
+| Library | Version | Purpose |
+|---------|---------|---------|
+| [html2canvas](https://html2canvas.hertzen.com/) | 1.4.1 | PNG export & clipboard copy |
+| [QRCode.js](https://github.com/davidshimjs/qrcodejs) | 1.0.0 | QR code generation |
+| [Google Fonts](https://fonts.google.com/) | — | DM Sans, DM Serif Display, Bebas Neue, Josefin Sans, Libre Baskerville |
+
+No npm, no bundler, no framework — everything loaded via CDN.
+
+---
+
+## 📐 Card Dimensions
+
+| Property | Value |
+|----------|-------|
+| Screen size | 380 × 217 px |
+| Real-world size | 3.5 × 2 inches (standard business card) |
+| Export resolution | 1330 × 760 px (~300 DPI) |
+
+---
+
+## 🗂️ Page Flow
 
 ```
-Sign Up  →  account saved to  localStorage["bizcardAccounts"]
-Login    →  session saved to  localStorage / sessionStorage
-app.html →  checks session on load, redirects if none found
-Logout   →  session cleared,  redirect to index.html
+index.html (Login)
+    │
+    ├── Already logged in? ──────────────────► app.html
+    │
+    ├── Login success ───────────────────────► app.html
+    │
+    └── No account? ──────► signup.html
+                                │
+                                └── Signup success ──► app.html
+                                                           │
+                                                       Logout ──► index.html
 ```
 
-### Card Rendering
+---
 
-Each template is a set of absolutely-positioned `div` elements rendered into a fixed `380×217px` container (standard 3.5×2 inch card ratio). On every input change, the state is read from the form, QR is regenerated, and the card HTML is rebuilt and injected.
+## 📱 Responsive Design
 
-### Data Persistence
-
-Card state is saved per user under the key `bizcardState_{email}` in `localStorage`. Switching users loads their own saved design automatically.
+- Works on desktop and mobile browsers.
+- On screens narrower than 860px, the two-column layout stacks vertically.
+- Card size scales down slightly on mobile (320 × 183 px).
 
 ---
 
-## Templates
+## 🖨️ Print Support
 
-| # | Name | Style |
-|---|------|-------|
-| 1 | Minimal Mono | Clean left-bar accent, DM Sans |
-| 2 | Dark Luxury | Dark background, italic serif, DM Serif Display |
-| 3 | Bold Brutalist | Full-width name, Bebas Neue |
-| 4 | Classic Editorial | Centered layout, corner brackets, Libre Baskerville |
-| 5 | Modern Split | Color-blocked left panel, Josefin Sans |
-| 6 | Urdu Style | Ornamental border frame, centered serif |
+When printing (`Ctrl+P` or the Print button):
+- Navigation bar, left panel, and preview bar are hidden automatically.
+- Only the business card is printed.
 
 ---
 
-## Technologies Used
+## 🔄 Resetting the App
 
-| Technology | Purpose |
-|---|---|
-| HTML5 / CSS3 | Structure and styling |
-| Vanilla JavaScript (ES5) | All app logic — no frameworks |
-| [html2canvas 1.4.1](https://html2canvas.hertzen.com/) | PNG export and clipboard copy |
-| [qrcodejs 1.0.0](https://github.com/davidshimjs/qrcodejs) | QR code generation |
-| Google Fonts | DM Serif Display, DM Sans, Bebas Neue, Josefin Sans, Libre Baskerville |
-| localStorage / sessionStorage | Auth sessions and card state |
+To fully reset everything (all accounts + card data):
+
+Open browser DevTools → Application → Local Storage → clear all keys starting with `bizcard`.
+
+Or click the **↺ Reset Card** button inside the app to reset only the current card design.
 
 ---
 
-## Browser Support
+## 📄 License
 
-| Browser | Supported |
-|---|---|
-| Chrome 90+ | ✅ |
-| Firefox 88+ | ✅ |
-| Edge 90+ | ✅ |
-| Safari 14+ | ✅ |
-| Mobile Chrome/Safari | ✅ (responsive at ≤860px) |
-
----
-
-## Known Limitations
-
-- Passwords are stored in **plain text** in `localStorage` — suitable for local demo only, not production
-- Card data is **browser-local** — clearing browser storage deletes all accounts and saved cards
-- No account recovery — forgot password shows an info notice only
-- QR rendering on PNG export may vary slightly across browsers
-- Mobile layout hides some nav elements but the card designer is not fully optimized for small screens
-
----
-
-## Project Info
-
-| | |
-|---|---|
-| **Type** | Mid-Term Project |
-| **Stack** | Pure HTML / CSS / JavaScript |
-| **Backend** | None |
-| **Storage** | Client-side only (`localStorage`) |
-| **CDN Dependencies** | html2canvas, qrcodejs |
-| **License** | MIT |
-
----
-
-## License
-
-MIT
+Free to use for personal and commercial projects.
