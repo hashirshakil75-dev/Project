@@ -81,17 +81,6 @@ script.js
 # Just open index.html in any modern browser
 open index.html
 ```
-
-Or serve locally for best results:
-
-```bash
-# Python
-python -m http.server 8080
-
-# Node.js
-npx serve .
-```
-
 Then visit `http://localhost:8080`
 
 ---
